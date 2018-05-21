@@ -1,7 +1,7 @@
 <template>
    <section class="hero is-fullheight is-default is-bold" id="app">
         <div class="hero-head">
-            <nav class="navbar">
+            <!-- <nav class="navbar">
                 <div class="container">
                     <div class="navbar-brand">
                         <a class="navbar-item" href="../">
@@ -25,7 +25,8 @@
                         </div>
                     </div>
                 </div>
-            </nav>
+            </nav> -->
+            <Nav></Nav>
         </div>
         <div class="hero-body">
             <div class="container has-text-centered">
@@ -61,8 +62,12 @@
 </template>
 
 <script>
+import Nav from "./components/Nav"
 export default {
-  name: 'App'
+  name: 'App',
+  components:{
+    Nav
+  }
 }
 </script>
 
