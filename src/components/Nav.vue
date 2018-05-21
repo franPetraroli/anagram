@@ -1,38 +1,42 @@
 <template>
   <nav class="navbar">
       <div class="container">
-          <div class="navbar-brand">
-              <a class="navbar-item" href="../">
-                <h1>ANAGRAMMA</h1>
-              </a>
-              <span class="navbar-burger burger" data-target="navbarMenu">
-                <span></span>
-                <span></span>
-                <span></span>
-              </span>
+        <div class="navbar-brand">
+          <a class="navbar-item" href="../">
+            <!-- <img src="" alt="Logo"> -->
+            <h3>ANAGRAMMA</h3>
+          </a>
+          <span class="navbar-burger burger" @click="showNav = !showNav" :class="{ 'is-active': showNav }">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </div>
+        <div id="navbarMenu" class="navbar-menu" :class="{ 'is-active' : showNav }">
+          <div class="navbar-end">
+            <router-link to="/" class="navbar-item is-active">
+                Home
+            </router-link>
+            <router-link to="/backend" class="navbar-item">
+              About
+            </router-link>
+            <a class="navbar-item">
+              Resources
+            </a>
           </div>
-          <div id="navbarMenu" class="navbar-menu">
-              <div class="navbar-end">
-                  <div class="tabs is-right">
-                      <ul>
-                          <li class="is-active"><a>Home</a></li>
-                          <li><a href="">Saved words</a></li>
-                          <li><a href="">Log Out</a></li>
-                      </ul>
-                  </div>
-              </div>
-          </div>
+        </div>
       </div>
-  </nav>
+    </nav>
 </template>
 
 <script>
-export default {
-  name: 'Nav',
-  data () {
-    return {
-      
+  export default {
+    name: 'Nav',
+    data() {
+      return {
+
+      }
     }
   }
-}
+
 </script>
