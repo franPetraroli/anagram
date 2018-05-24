@@ -6,24 +6,30 @@ import router from '../router'
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
-  
-    state:{
-        searched_word:'test'
-    },
-    mutations:{
-        calculate(state, word) {
-            state.searched_word = word
-            router.push("/result")
-          }
-    },
-    actions:{
 
+  state: {
+    searched_word: '',
+    word_array: ''
+  },
+  mutations: {
+    update_word_array(state, word) {
+      state.word_array = word
+      router.push("/result")
     },
-    getters:{
-        word: state => {
-            return state.searched_word
-          }
+    splice(state, index) {
+      state.word_array.splice(index, 1)
     }
+  },
+  actions: {
+    calculate: (context) => {
+
+    }
+  },
+  getters: {
+    word: state => {
+      return state.searched_word
+    }
+  }
 });
 
 

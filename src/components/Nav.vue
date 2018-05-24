@@ -4,7 +4,7 @@
         <div class="navbar-brand">
           <a class="navbar-item" href="../">
             <!-- <img src="" alt="Logo"> -->
-            <h3>ANAGRAMMA</h3>
+            <h3>ANAGRANMA</h3>
           </a>
           <span class="navbar-burger burger" @click="showNav = !showNav" :class="{ 'is-active': showNav }">
             <span></span>
@@ -34,7 +34,7 @@
     name: 'Nav',
     data() {
       return {
-
+        showNav: false
       }
     }
   }
