@@ -12,6 +12,7 @@
   "dependencies": {
     "bulma": "^0.7.1",
     "firebase": "^5.0.3",
+    "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
