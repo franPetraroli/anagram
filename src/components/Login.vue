@@ -9,11 +9,11 @@
                        Login            
                   </h1>
                   <p class="control has-icon">
-                    <input class="input" type="email" placeholder="Email">
+                    <input class="input" type="email" placeholder="Email" v-model="email">
                     <i class="fa fa-envelope"></i>
                   </p>
                   <p class="control has-icon">
-                    <input class="input" type="password" placeholder="Password">
+                    <input class="input" type="password" placeholder="Password" v-model="passw">
                     <i class="fa fa-lock"></i>
                   </p>
                   <p class="control">
@@ -23,7 +23,7 @@
                     </label>
                   </p>
                   <p class="control">
-                    <button class="button is-primary is-medium is-fullwidth">
+                    <button class="button is-primary is-medium is-fullwidth" @click="login">
                       <i class="fa fa-user"></i>
                       Login
                     </button>
@@ -41,11 +41,28 @@ import firebase from "firebase";
 
 export default {
   data() {
-    return {};
+    return {
+      email: "",
+      passw: ""
+    };
   },
   methods: {
-    login: () => {
-      firebase.auth().createUserWithEmailAndPassword("test@test.com", "test");
+    login: function(e) {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.email, this.passw)
+        .then(
+          user => {
+            this.$store.dispatch("login", this.email);
+            alert(`You are logged in as: ${this.email}`);
+
+            this.$router.push("/");
+          },
+          err => {
+            alert(err.message);
+          }
+        );
+      e.preventDefault();
     }
   }
 };

@@ -5,27 +5,11 @@
         <div class="columns is-centered">
           <article class="card is-rounded">
             <div class="card-content">
-              <h1 class="title">
-                Register
-              </h1>
-              <p class="control has-icon">
-                <input class="input" type="name" placeholder="Username">
-                <i class="fas fa-user"></i>
-              </p>
-              <p class="control has-icon">
-                <input class="input" type="email" placeholder="Email">
-                <i class="fa fa-envelope"></i>
-              </p>
-              <p class="control has-icon">
-                <input class="input" type="password" placeholder="Password">
-                <i class="fa fa-lock"></i>
-              </p>
-              <p class="control">
-                <button class="button is-primary is-medium is-fullwidth">
-                  <i class="fa fa-user"></i>
-                  Register
-                </button>
-              </p>
+              <form action="register">
+                <input type="email" name="email" v-model="email">
+                <input type="password" name="passw" v-model="passw">
+                <button type="submit" @click="register">Register</button>
+              </form>
             </div>
           </article>
         </div>
@@ -39,11 +23,26 @@ import firebase from "firebase";
 
 export default {
   data() {
-    return {};
+    return {
+      email: "nino@nino.com",
+      passw: ""
+    };
   },
   methods: {
-    login: () => {
-      firebase.auth().createUserWithEmailAndPassword("test@test.com", "test");
+    register: function(e) {
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(this.email, this.passw)
+        .then(
+          user => {
+            alert(`Account created with username${this.username}`);
+            this.$router.push("/");
+          },
+          err => {
+            alert(err.message);
+          }
+        );
+      e.preventDefault();
     }
   }
 };
