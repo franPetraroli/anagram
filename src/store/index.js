@@ -8,18 +8,19 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
 
   state: {
-    searched_word: null,
-    word_array: null,
+    searchedWord: null,
+    wordArray: null,
     isLoggedIn: false,
     currentUser: null
   },
   mutations: {
-    update_word_array(state, word) {
-      state.word_array = word
+    updateWordArray(state, payload) {
+      state.wordArray = payload.result
+      state.searchedWord = payload.word
       router.push("/result")
     },
     splice(state, index) {
-      state.word_array.splice(index, 1)
+      state.wordArray.splice(index, 1)
     },
     login(state) {
       state.isLoggedIn = true
@@ -38,7 +39,6 @@ const store = new Vuex.Store({
     login: (context, email) => {
       context.commit('login')
       context.commit('currentUser', email)
-      console.log(email)
     },
     logout: (context) => {
       context.commit('logout')
@@ -47,13 +47,16 @@ const store = new Vuex.Store({
   },
   getters: {
     word: state => {
-      return state.searched_word
+      return state.searchedWord
     },
     isLoggedIn: state => {
       return state.isLoggedIn
     },
     currentUser: state => {
       return state.currentUser
+    },
+    wordArray: state => {
+      return state.wordArray
     }
   }
 });

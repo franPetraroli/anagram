@@ -15,14 +15,17 @@
       </div>
 
       <div class="navbar-end">
-        <a v-show="isLoggedIn" class="navbar-item">
+        <a v-show="!isLoggedIn"  class="navbar-item">
           <router-link to="/login">Login</router-link>
         </a>
-        <a v-show="isLoggedIn" class="navbar-item">
+        <a v-show="!isLoggedIn" class="navbar-item">
           <router-link to="/register">Register</router-link>
         </a>
-        <a v-show="!isLoggedIn" class="navbar-item" @click="logout">
+        <a v-show="isLoggedIn" class="navbar-item" @click="logout">
           Logout
+        </a>
+        <a v-show="isLoggedIn" class="navbar-item" @click="logout">
+          Logged in as {{this.$store.getters.currentUser}}
         </a>
       </div>
   </nav>
@@ -37,9 +40,14 @@ export default {
   name: "Nav",
   data() {
     return {
-      isLoggedIn: this.$store.getters.isLoggedIn,
+      // isLoggedIn: this.$store.getters.isLoggedIn,
       currentUser: this.$store.getters.currentUser
     };
+  },
+  computed: {
+    isLoggedIn: () => {
+      return store.getters.isLoggedIn;
+    }
   },
   methods: {
     logout: e => {

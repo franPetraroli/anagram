@@ -3,7 +3,7 @@
     <div class="card" v-for="item in words" :key="words[item]">
       <h5 class="word">{{ item }}</h5>
       <div class="icons">
-        <i class="far fa-star" id="star"></i>
+        <i class="far fa-star" id="star" @click="save(item)"></i>
         <i class="far fa-times-circle" id="cross" @click="remove(words.indexOf(item))"></i>
       </div>
     </div>
@@ -12,17 +12,27 @@
 </template>
 <script>
 import store from "../store";
+import db from "../firebase";
 
 export default {
   name: "HelloWorld",
   data() {
     return {
-      words: store.state.word_array
+      words: this.$store.getters.wordArray
     };
   },
   methods: {
-    remove: itemx => {
-      store.commit("splice", itemx);
+    remove: item => {
+      store.commit("splice", item);
+    },
+    save: item => {
+      console.log(store.getters.word);
+      if (db.collection("favourite").doc(store.getters.word.toString())) {
+        db
+          .collection("favourite")
+          .doc(store.getters.word.toString())
+          .set({ [item]: item }, { merge: true }); //({ word: item }, { merge: true });
+      }
     }
   }
 };
