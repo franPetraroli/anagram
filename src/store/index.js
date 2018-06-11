@@ -9,7 +9,7 @@ const store = new Vuex.Store({
 
   state: {
     searchedWord: null,
-    wordArray: null,
+    wordArray: [],
     isLoggedIn: false,
     currentUser: null
   },

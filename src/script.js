@@ -15,7 +15,7 @@ const generate = (word) => {
 
 function bringToLast(myArray, base, lastIndex, element, original, array_length, result){
 	while(lastIndex > 1){
-		var word_iteration = myArray.join('')
+		var word_iteration = {word: myArray.join(''), isActive: false}
 		result.push(word_iteration)
 		swap(myArray,base, lastIndex);
 		lastIndex--
