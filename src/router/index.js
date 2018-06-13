@@ -4,6 +4,7 @@ import Main from "@/components/Main";
 import Result from "@/components/Result";
 import Login from "@/components/Login";
 import Register from "@/components/Register";
+import List from "@/components/List";
 
 Vue.use(Router);
 
@@ -27,6 +28,11 @@ export default new Router({
       path: "/register",
       name: "register",
       component: Register
+    },
+    {
+      path: "/list",
+      name: "list",
+      component: List
     }
   ]
 });

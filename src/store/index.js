@@ -11,7 +11,8 @@ const store = new Vuex.Store({
     searchedWord: null,
     wordArray: [],
     isLoggedIn: false,
-    currentUser: null
+    currentUser: null,
+    favouriteWords: []
   },
   mutations: {
     updateWordArray(state, payload) {
@@ -33,16 +34,34 @@ const store = new Vuex.Store({
     },
     emptyEmail(state) {
       state.currentUser = ''
+    },
+    fetchFavourite(state){
+      var docRef = db.collection("favourite").doc(state.currentUser);
+      docRef.get().then(function (doc) {
+        if (doc.exists) {
+          state.favouriteWords = doc.data()
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+        }
+      }).catch(function (error) {
+        console.log("Error getting document:", error);
+      });
+    },
+    resetFavList(state){
+      state.favouriteWords = []
     }
   },
   actions: {
     login: (context, email) => {
       context.commit('login')
       context.commit('currentUser', email)
+      context.commit('fetchFavourite')
     },
     logout: (context) => {
       context.commit('logout')
       context.commit('emptyEmail')
+      context.commit('resetFavList')
     }
   },
   getters: {
@@ -57,6 +76,9 @@ const store = new Vuex.Store({
     },
     wordArray: state => {
       return state.wordArray
+    },
+    favouriteWords: state => {
+      return state.favouriteWords
     }
   }
 });

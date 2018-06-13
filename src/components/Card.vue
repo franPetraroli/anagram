@@ -50,9 +50,8 @@ import { firestore } from 'firebase';
         //Delete item from the database
         let toDelete = item.word.toString()
         let user = store.getters.currentUser.toString()
-        console.log(user)
-        // var refFavourite = db.collection('favourite').doc('nino@nino.com')
-        db.collection('favourite').doc('nino@nino.com').update({ 'tets': firestore.FieldValue.delete()}).then(this.toggle(item));
+  
+        db.collection('favourite').doc(user).update({ [toDelete]: firestore.FieldValue.delete()}).then(this.toggle(item));
       }
     }
   };

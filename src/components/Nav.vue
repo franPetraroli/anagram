@@ -8,7 +8,7 @@
             <router-link to="/">Home</router-link>
           </a>
           <a class="navbar-item">
-            Your List
+            <router-link to="/list">Your Saved Words</router-link>
           </a>
           </div>
         </div>
